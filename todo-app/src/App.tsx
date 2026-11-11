@@ -1,4 +1,6 @@
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 function App() {
   return (
@@ -15,7 +17,9 @@ function App() {
             className="w-full border-none bg-transparent text-xl text-gray-700 outline-none placeholder:text-gray-800"
           />
 
-         
+          <button className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-teal-600 text-white">
+            <FontAwesomeIcon icon={faPlus} />
+          </button>
 
         </div>
 
