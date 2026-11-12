@@ -4,9 +4,14 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 function App() {
   return (
-    <div className="min-h-screen px-4 py-[22px]">
+    <div className="min-h-screen bg-[#191919] px-4 py-[22px]">
 
       <div className="mx-auto max-w-[1055px] rounded bg-white px-6 py-8 sm:px-16">
+
+        
+        <h1 className="mb-16 text-center text-6xl font-bold tracking-wide text-[#eeeeee] sm:text-7xl md:text-8xl">
+          todos
+        </h1>
 
         
         <div className="flex h-[72px] items-center rounded-full border border-gray-200 px-6 shadow-md sm:px-10">
