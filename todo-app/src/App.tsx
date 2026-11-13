@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
 
+
 interface Todo {
   id: number
   text: string
@@ -10,6 +11,7 @@ interface Todo {
 }
 
 function App() {
+
   const [todos, setTodos] = useState<Todo[]>([])
   const [newTodo, setNewTodo] = useState('')
   function addTodo() {
@@ -17,16 +19,25 @@ function App() {
       return
     }
 
-    
     const todo: Todo = {
       id: Date.now(),
       text: newTodo.trim(),
       completed: false
     }
 
-    
     setTodos([...todos, todo])
     setNewTodo('')
+  }
+
+
+  function toggleTodo(id: number) {
+    setTodos((previousTodos) =>
+      previousTodos.map((todo) =>
+        todo.id === id
+          ? { ...todo, completed: !todo.completed }
+          : todo
+      )
+    )
   }
 
   return (
@@ -34,12 +45,12 @@ function App() {
 
       <div className="mx-auto w-full max-w-263.75 rounded bg-white px-6 py-8 sm:px-16">
 
-        
+      
         <h1 className="mb-16 text-center text-6xl font-bold tracking-wide text-[#eeeeee] sm:text-7xl md:text-8xl">
           todos
         </h1>
 
-        
+      
         <div className="flex h-18 items-center rounded-full border border-gray-200 px-6 shadow-md sm:px-10">
 
           <input
@@ -65,30 +76,36 @@ function App() {
 
         </div>
 
-        
+      
         <div className="mt-10">
 
           {todos.map((todo) => (
             <div
               key={todo.id}
-              className="flex min-h-[95px] items-center gap-5 border-b border-gray-200 py-3"
+              className="flex min-h-23.75 items-center gap-5 border-b border-gray-200 py-3"
             >
 
-            
+             
               <input
                 type="checkbox"
+                checked={todo.completed}
+                onChange={() => toggleTodo(todo.id)}
                 className="h-5 w-5 shrink-0 cursor-pointer accent-teal-600"
               />
 
-              
-              <p className="flex-1 text-lg text-gray-600 sm:text-xl md:text-2xl">
+             
+              <p
+                className={`flex-1 text-lg text-gray-600 sm:text-xl md:text-2xl ${
+                  todo.completed ? 'line-through text-gray-400' : ''
+                }`}
+              >
                 {todo.text}
               </p>
 
               
               <button
                 type="button"
-                className="flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full bg-gray-100 text-red-500"
+                className="flex h-19 w-19 shrink-0 items-center justify-center rounded-full bg-gray-100 text-red-500"
               >
                 <FontAwesomeIcon icon={faTrash} size="lg" />
               </button>
